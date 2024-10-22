@@ -101,6 +101,11 @@ const weaponsArray = [
 // ITERATION 2
 
 function selectRandom(arr) {
+	if (!arr.length) {
+		console.warn('Stack is empty and does not contain any cards.')
+		return undefined
+	}
+
 	const randomIndex = Math.floor(Math.random() * arr.length)
 	return arr[randomIndex]
 }
@@ -115,4 +120,12 @@ function pickMystery() {
 
 // ITERATION 3
 
-function revealMystery() {}
+function revealMystery(envelope) {
+	if (!envelope.suspect || !envelope.weapon || !envelope.room) {
+		throw new Error(
+			'The envelop object must be of shape { suspect, weapon, room }'
+		)
+	}
+
+	return `${envelope.suspect.firstName} ${envelope.suspect.lastName} killed Mr. Boddy using the ${envelope.weapon.name} in the ${envelope.room.name}!`
+}
